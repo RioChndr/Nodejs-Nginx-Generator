@@ -50,7 +50,7 @@ fs.writeFileSync(input.outputFile, format, 'utf-8')
 console.log(chalkInfo(`output: ${input.outputFile}`))
 
 console.log(chalkInfo(`Copy file to sites-enabled`))
-exec(`cp -s ${input.outputFile} /etc/nginx/sites-enabled/`)
+exec(`sudo ln -s ${input.outputFile} /etc/nginx/sites-enabled/${input.outputFile}`)
 
 console.log(chalkInfo(`Run certbot to generate SSL certificate for ${input.url}`))
 exec(`certbot certonly --nginx --preferred-challenges http -d ${input.url}`, (err, stdout, stderr) => {
