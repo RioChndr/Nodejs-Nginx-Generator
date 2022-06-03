@@ -2,7 +2,7 @@
   "name": "nginx-gen",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/nginx-sites.js",
   "type": "module",
   "bin": {
     "nginx-gen": "./src/nginx-sites.js"
@@ -10,8 +10,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RioChndr/Nodejs-Nginx-Generator"
+  },
+  "author": "Rio Chandra",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^5.0.1",
     "commander": "^9.3.0"
