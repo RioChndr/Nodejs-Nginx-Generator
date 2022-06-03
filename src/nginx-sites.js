@@ -52,6 +52,9 @@ console.log(chalkInfo(`output: ${input.outputFile}`))
 console.log(chalkInfo(`Copy file to sites-enabled`))
 exec(`sudo ln -s ${process.cwd()}/${input.outputFile} /etc/nginx/sites-enabled/${input.outputFile}`)
 
+console.log(chalkInfo(`Reload nginx`))
+exec(`sudo nginx -s reload`)
+
 console.log(chalkInfo(`Run certbot to generate SSL certificate for ${input.url}`))
 exec(`certbot certonly --nginx --preferred-challenges http -d ${input.url}`, (err, stdout, stderr) => {
   if (err) {
