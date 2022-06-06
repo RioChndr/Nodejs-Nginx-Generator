@@ -11,6 +11,7 @@ program
   .option('-u, --url <url>', 'URL of the site')
   .option('-o, --output <dest output>', 'Output file')
   .option('-p, --port <port>', 'Port of the site')
+  .option('-c, --certbot', 'Use certbot to generate SSL certificate')
 
 program.parse(process.argv);
 
@@ -55,12 +56,17 @@ exec(`sudo ln -s ${process.cwd()}/${input.outputFile} /etc/nginx/sites-enabled/$
 console.log(chalkInfo(`Reload nginx`))
 exec(`sudo nginx -s reload`)
 
-console.log(chalkInfo(`Run certbot to generate SSL certificate for ${input.url}`))
-exec(`certbot certonly --nginx --preferred-challenges http -d ${input.url}`, (err, stdout, stderr) => {
-  if (err) {
-    console.log(chalk.red(`Error: ${err}`))
-    return
-  }
-  console.log(chalk.green(`stdout: ${stdout}`))
-  console.log(chalk.green(`stderr: ${stderr}`))
-})
+if(options.certbot) {
+  console.log(chalkInfo(`Run certbot to generate SSL certificate for ${input.url}`))
+  exec(`certbot certonly --nginx --preferred-challenges http -d ${input.url}`, (err, stdout, stderr) => {
+    if (err) {
+      console.log(chalk.red(`Error: ${err}`))
+      return
+    }
+    console.log(chalk.green(`stdout: ${stdout}`))
+    console.log(chalk.green(`stderr: ${stderr}`))
+  })
+} else {
+  console.log(chalkInfo('Finish without SSL certificate'))
+  console.log(chalkInfo(`Please run certbot to generate SSL certificate for ${input.url}`))
+}
