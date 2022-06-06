@@ -1,6 +1,6 @@
 {
   "name": "nginx-gen",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "",
   "main": "./src/nginx-sites.js",
   "type": "module",
